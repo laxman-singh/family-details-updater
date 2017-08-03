@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Supplier Details Updater</title>
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Titillium+Web:400,300,700&amp;subset=latin,latin-ext" />
+
+<link rel="stylesheet" href="css/bootstrap-ui.min.css" />
+</head>
+
+<body class="site">
+	<header role="banner" class="site-header">
+		<nav class="navbar navbar-static-top navbar-primary">
+			<div class="container">
+				<div class="navbar-header">
+					<a th:href="@{/}" class="navbar-brand offset-right-large"
+						title="Family Detail Updater">Family Details Updater</a>
+				</div>
+			</div>
+		</nav>
+	</header>
+
+	<main role="main" class="site-content">
+	<div class="jumbotron">
+	<div class="container">
+	 <div class="well">
+		<div class="well well-sm">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+		<form th:action="@{/login}" method="POST" class="form-horizontal" role="form">
+			 <div style="margin-bottom: 25px" class="input-group">
+                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                 <input id="login-username" type="text" class="form-control" name="email" value="" th:placeholder="email">                                        
+             </div>
+				
+			<div style="margin-bottom: 25px" class="input-group">
+	             <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+	             <input id="login-password" type="password" class="form-control" name="password" th:placeholder="password">
+	         </div>
+				
+			<div align="center" th:if="${param.error}">
+				<p style="font-size: 20; color: #FF1C19;">Email or Password invalid, please verify</p>
+			</div>
+			<button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit" th:text="Login"></button>
+		</form>
+	</div></div></div>
+	<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+	<form th:action="@{/registration}" method="get">
+		<button class="btn btn-md btn-warning btn-block" type="Submit">Go To Registration Page</button>
+	</form>	
+	</div></div>
+	</div></div></div>
+	</main>
+
+	<footer role="contentinfo" class="site-footer navbar-primary">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+					© CopyRight,All Rights Reserved 2017
+				</div>
+			</div>
+		</div>
+	</footer>
+</body>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/moment-with-locales.min.js"></script>
+<script src="js/select2.min.js"></script>
+<script src="js/bootstrap-ui.min.js"></script>
+</html> 

@@ -5,7 +5,7 @@ import com.laxman.updater.model.AppUser;
 
 public interface UserService {
 	
-	public AppUser findUserByEmail(String email);
-	public void saveUser(AppUser user);
+	AppUser findUserByEmail(String email);
+	void saveUser(AppUser user);
 
 }

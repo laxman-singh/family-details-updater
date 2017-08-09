@@ -1,5 +1,9 @@
 package com.laxman.updater.controller;
 
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +16,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.laxman.updater.model.AppUser;
+import com.laxman.updater.model.ChildrenDetails;
+import com.laxman.updater.model.ParentDetails;
+import com.laxman.updater.model.ChildrenDetails.Gender;
+import com.laxman.updater.repository.ParentnChildRepository;
+import com.laxman.updater.service.ParentnChildService;
 import com.laxman.updater.service.UserService;
 
 /**
@@ -21,9 +30,15 @@ import com.laxman.updater.service.UserService;
  */
 @Controller
 public class LoginController {
+	
+	@Autowired
+	private ParentnChildRepository parentChildRepo;
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private ParentnChildService parentChildService;
 
 	@RequestMapping(value = { "/", "/login" }, method = RequestMethod.GET)
 	public ModelAndView login() {
@@ -36,7 +51,7 @@ public class LoginController {
 	public ModelAndView registration() {
 		ModelAndView modelAndView = new ModelAndView();
 		AppUser user = new AppUser();
-		modelAndView.addObject("user", user);
+		modelAndView.addObject("appUser", user);
 		modelAndView.setViewName("registration");
 		return modelAndView;
 	}
@@ -54,7 +69,7 @@ public class LoginController {
 		} else {
 			userService.saveUser(user);
 			modelAndView.addObject("successMessage", "User has been registered successfully");
-			modelAndView.addObject("user", new AppUser());
+			modelAndView.addObject("appUser", new AppUser());
 			modelAndView.setViewName("registration");
 
 		}
@@ -68,8 +83,9 @@ public class LoginController {
 		AppUser user = userService.findUserByEmail(auth.getName());
 		modelAndView.addObject("userName",
 				"Welcome " + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
-		modelAndView.addObject("adminMessage", "Content Available Only for Users with Admin Role");
+		modelAndView.addObject("parentDetails", parentChildService.getAllParentChildDetails());
 		modelAndView.setViewName("admin/home");
+		
 		return modelAndView;
 	}
 }

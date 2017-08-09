@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class FaimilyDetailsUpdaterApplication {
+public class FamilyDetailsUpdaterApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(FaimilyDetailsUpdaterApplication.class, args);
+		SpringApplication.run(FamilyDetailsUpdaterApplication.class, args);
 	}
 }

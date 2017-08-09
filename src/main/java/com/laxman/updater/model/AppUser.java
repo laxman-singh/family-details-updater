@@ -12,19 +12,21 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
+/**
+ * 
+ * @author "Laxman Singh ~ laxman.1390@gmail.com"
+ *
+ */
 @Entity
 @Table(name = "app_user")
 public class AppUser {
 
 	@Id
-	//@GeneratedValue(strategy = GenerationType.AUTO)
-	//@GeneratedValue(strategy = GenerationType.IDENTITY, generator="app_user_user_id_seq")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_id")
 	private int id;

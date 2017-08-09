@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Family Details Updater</title>
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Titillium+Web:400,300,700&amp;subset=latin,latin-ext" />
+
+<link rel="stylesheet" href="../css/bootstrap-ui.min.css" />
+</head>
+
+<body class="site">
+	<header role="banner" class="site-header">
+		<nav class="navbar navbar-static-top navbar-primary">
+			<div class="container">
+				<div class="navbar-header">
+					<a th:href="@{/}" class="navbar-brand offset-right-large"
+						title="Family Detail Updater">Family Details Updater</a>
+				</div>
+			</div>
+		</nav>
+	</header>
+
+	<main role="main" class="site-content">
+	<div class="jumbotron">
+	<div class="container">
+		<div class="panel panel-info">
+		    <div class="panel-heading panel-heading-extended">
+		           <h4>Parent and Child Details Form</h4>
+		    </div>
+		    <div class="panel-body">
+		<div class="container">
+		<div class="row">
+			<div class="col-md-12 col-md-offset-0">
+				<form autocomplete="off" action="#" th:action="@{/admin/addParentDetails}"
+					th:object="${parentDetails}" method="post" class="form-horizontal"
+					role="form">
+					<div class="form-group">
+						<div class="col-sm-6">
+						<label th:if="${#fields.hasErrors('fatherName')}" th:errors="*{fatherName}"
+								class="alert-error"></label>
+						<input type="text" th:field="*{fatherName}" placeholder="Father's Name"
+								class="form-control" /> 
+						</div>
+					
+						<div class="col-sm-6">
+						<label	th:if="${#fields.hasErrors('motherName')}" th:errors="*{motherName}"
+								class="alert-error"></label>
+							<input type="text" th:field="*{motherName}"
+								placeholder="Mother's Name" class="form-control" /> 
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-6">
+							<label th:if="${#fields.hasErrors('fatherOcc')}" th:errors="*{fatherOcc}"
+								class="alert-error"></label>
+							<input type="text" th:field="*{fatherOcc}" placeholder="Father's Occupation"
+								class="form-control" /> 
+						</div>
+					
+						<div class="col-sm-6">
+							<label th:if="${#fields.hasErrors('motherOcc')}" th:errors="*{motherOcc}"
+								class="alert-error"></label>
+							<input type="text" th:field="*{motherOcc}"
+								placeholder="Mother's Occupation" class="form-control" /> 
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<div class="col-sm-6">
+							<label th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"
+								class="alert-error"></label>
+							<input type="text" th:field="*{phone}" placeholder="Phone Number"
+								class="form-control" /> 
+						</div>
+					
+						<div class="col-sm-6">
+							<label th:if="${#fields.hasErrors('address')}" th:errors="*{address}"
+								class="alert-error"></label>
+							<input type="text" th:field="*{address}"
+								placeholder="Address" class="form-control" /> 
+						</div>
+					</div>
+					
+				<div class="table-responsive" id="tbl">
+				    <table class="table table-hover" id="childrenTbl">
+				        <thead>
+				            <tr>
+				                <th class="table-cell-id">#</th>
+				                <th>Child Name</th>
+				                <th>Date of Birth</th>
+				                <th>Gender</th>
+				                <th></th>
+				            </tr>
+				        </thead>
+				        <tbody>
+				            	<tr th:each="childDetails,status : ${parentDetails.childrenDetails}" th:if="${not #lists.isEmpty(parentDetails.childrenDetails)}">
+				            		<td class="table-cell-id" th:text="${status.count}"></td>
+					                <td><input type="text" th:field="*{childrenDetails[__${status.index}__].childName}" th:value="${childDetails.childName}" placeholder="Child Name" class="form-control" /></td>
+					               	<td><div class="input-group date" data-onload-datetimepicker='{"locale": "en", "format": "DD/MM/YYYY"}'>
+						                <input type="text" class="form-control" th:field="*{childrenDetails[__${status.index}__].childDob}" th:value="${#dates.format(childDetails.childDob, 'dd/MM/yyyy')}" placeholder="Date of Birth"/>
+						                <span class="input-group-addon">
+						                    <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+						                </span>
+									</div></td>
+									<td>
+										<select th:field="*{childrenDetails[__${status.index}__].childGender}" th:value="${childDetails.childGender}" class="form-control">
+										  <option value="M">Male</option>
+										  <option value="F">FeMale</option>
+										</select>
+									</td>
+					                <td class="table-cell-actions">
+					                    <a href="#" class="item-action item-action-danger" title="Delete">
+					                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+					                    </a>
+					                </td>
+				            	</tr>
+				            	
+				            	<tr th:if="${#lists.isEmpty(parentDetails.childrenDetails)}">
+				            		<td class="table-cell-id">1.</td>
+					                <td><input type="text" th:field="*{childrenDetails[__0__].childName}" placeholder="Child Name" class="form-control" /></td>
+					               	<td><div class="input-group date" data-onload-datetimepicker='{"locale": "en", "format": "DD/MM/YYYY"}'>
+						                <input type="text" class="form-control" th:field="*{childrenDetails[__0__].childDob}" placeholder="Date of Birth"/>
+						                <span class="input-group-addon">
+						                    <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+						                </span>
+									</div></td>
+									<td>
+										<select th:field="*{childrenDetails[__0__].childGender}" class="form-control">
+										  <option value="M">Male</option>
+										  <option value="F">FeMale</option>
+										</select>
+									</td>
+					                <td class="table-cell-actions">
+					                    <a href="#" class="item-action item-action-danger" title="Delete">
+					                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+					                    </a>
+					                </td>
+				            	</tr>
+			        </tbody>
+					 </table>
+					 <button type="button" class="btn btn-primary btn-responsive pull-right" id="addBtn">Add</button>
+				</div>
+
+					
+
+					<div class="form-group">
+						<div class="col-sm-3">
+							<button type="submit" class="btn btn-primary btn-block">Add Details</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div></div>
+		    </div>
+		</div>
+	</div>
+</div>
+
+	<footer role="contentinfo" class="site-footer navbar-primary">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+					© CopyRight,All Rights Reserved 2017
+				</div>
+			</div>
+		</div>
+	</footer>
+</body>
+
+<script src="../js/jquery.min.js"></script>
+<script src="../js/moment-with-locales.min.js"></script>
+<script src="../js/select2.min.js"></script>
+<script src="../js/bootstrap-ui.min.js"></script>
+<script src="../js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript">
+ $("#childrenTbl").on( "click", ".item-action-danger", function(e) {
+	   e.preventDefault();
+	   var rowCount = $('#childrenTbl tr').length, currentRow = ($(this).closest("tr")[0].rowIndex + 1);
+	   console.log("row count is " + rowCount + " and current row is "+ currentRow);
+	   $(this).parents("tr").remove();
+	   if(currentRow != rowCount) {
+		   /* $('tr', $("#childrenTbl")).each(function() {
+			   $(this).find('td input').each(function () {
+					console.log($(this).val());
+		        }); */
+		        var cache = $(this).closest('tbody');
+		       // $(this).closest('tr').remove();
+		        cache.find('tr input, tr select').attr('id',function(i){ return ('childrenDetails'+i + 1+'.childName') }); 
+			   
+			  // var rows = $('tr', $("#childrenTbl"));
+			  // console.log(rows.eq(currentRow));
+			  // var value = rows.eq(currentRow).find("input[name]").val();
+			   
+		  // });
+	   }
+	}); 
+ $("#tbl").on( "click", "#addBtn", function(e) {
+	   e.preventDefault();
+	   var rowCount = $('#childrenTbl tr').length;
+	   var row = "<tr><td class=\"table-cell-id\">"+rowCount+"</td>" +
+			   "<td><input placeholder=\"Child Name\" class=\"form-control\" name=\"childrenDetails["+(rowCount - 1)+"].childName\" value=\"\" type=\"text\"></td>" +
+			   "<td><div class=\"input-group date\" id=\"datepicker"+(rowCount - 1)+"\">" +
+               "<input type=\"text\" class=\"form-control\" name=\"childrenDetails["+(rowCount - 1)+"].childDob\" placeholder=\"Date of Birth\"/>" +
+	           "<span class=\"input-group-addon\"><span class=\"glyphicon glyphicon-calendar\" aria-hidden=\"true\"></span></span></div></td>" +
+			   "<td><select name=\"childrenDetails["+(rowCount - 1)+"].childGender\" class=\"form-control\">" +
+			   "<option value=\"M\">Male</option><option value=\"F\">FeMale</option></select></td>" +
+			   "<td class=\"table-cell-actions\"><a href=\"#\" class=\"item-action item-action-danger\" title=\"Delete\">" +
+			   "<span class=\"glyphicon glyphicon-trash\" aria-hidden=\"true\"></span></a></td></tr>";
+	   $("#childrenTbl").children('tbody').append(row);
+	   $("#datepicker"+(rowCount - 1)).datetimepicker({"locale": "en", "format": "DD/MM/YYYY"});
+	}); 
+</script>
+</html> 

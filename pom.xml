@@ -4,17 +4,17 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.laxman.updater</groupId>
-	<artifactId>faimily-details-updater</artifactId>
+	<artifactId>family-details-updater</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>faimily-details-updater</name>
+	<name>family-details-updater</name>
 	<description>Spring Boot using Spring Data JPA for CRUD operations</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.0.0.BUILD-SNAPSHOT</version>
+		<version>2.0.0.BUILD-SNAPSHOT</version> 
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 

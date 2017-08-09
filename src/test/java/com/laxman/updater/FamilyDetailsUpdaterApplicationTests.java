@@ -1,4 +1,4 @@
-package faimilydetailsupdater;
+/*package com.laxman.updater;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,10 +7,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class FaimilyDetailsUpdaterApplicationTests {
+public class FamilyDetailsUpdaterApplicationTests {
 
 	@Test
 	public void contextLoads() {
 	}
 
 }
+*/

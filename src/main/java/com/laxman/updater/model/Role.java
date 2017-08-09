@@ -7,6 +7,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * 
+ * @author "Laxman Singh ~ laxman.1390@gmail.com"
+ *
+ */
 @Entity
 @Table(name = "role")
 public class Role {
